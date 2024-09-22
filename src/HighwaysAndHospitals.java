@@ -17,40 +17,32 @@ public class HighwaysAndHospitals {
      *  hospital access for all citizens in Menlo County.
      */
     public static long cost(int n, int hospitalCost, int highwayCost, int cities[][]) {
-//        System.out.println(highwayCost);
-//        System.out.println(hospitalCost);
-        int connected = 0;
-        int[] counted = new int[cities.length];
-        int totalcost =0;
-        for(int i = 0; i < cities.length; i++){
-            for(int j = 0; j< cities[0].length; j++) {
-                if (cities[i][0] == cities[0][j]){
-                    for(int k = 0; k < cities.length; k++){
-                        if(cities[i][0] != counted[k]){
-                            connected++;
-                            counted[i] = cities[i][0];
-                        }
-                    }
-                }
-                else if (cities[i][0] == cities[j][0]) {
-                    for(int k = 0; k < cities.length; k++){
-                        if(cities[i][0] != counted[k]){
-                            connected++;
-                            counted[i] = cities[i][0];
-                        }
-                    }
-                }
+        int[] roots = new int[n];
+        for(int i =0; i < n; i++){
+            roots[i] = i;
+        }
+
+        for (int[] city : cities){
+            int a = city[0] - 1;
+            int b = city[1] - 1;
+            while(a != roots[a]){
+                a = roots[a];
+            }
+            while(a != roots[b]){
+                b = roots[b];
+            }
+            if(a != b)
+                roots[b] = a;
+        }
+        int total = 0;
+        int v = 0;
+        for(int i =0; i < n; i++){
+            if(roots[i] == i){
+                v++;
             }
         }
-        System.out.println(connected);
-//        if(highwayCost < hospitalCost) {
-//            totalcost += connected*hospitalCost;
-//            totalcost += (n- connected) * highwayCost;
-//            return totalcost;
-//        }
-//        else {
-//            return hospitalCost * n;
-//        }
-        return 0;
+        System.out.println(v);
+        return total;
     }
+
 }
