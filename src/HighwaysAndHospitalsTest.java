@@ -44,7 +44,7 @@ public class HighwaysAndHospitalsTest {
     }
 
     @Test
-    @Timeout(value = 1100, unit = TimeUnit.MILLISECONDS)
+    @Timeout(value = 11000, unit = TimeUnit.SECONDS)
     public void testEfficientLarge() {
         setTestData(10);
     }

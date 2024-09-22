@@ -17,31 +17,39 @@ public class HighwaysAndHospitals {
      *  hospital access for all citizens in Menlo County.
      */
     public static long cost(int n, int hospitalCost, int highwayCost, int cities[][]) {
+        if(hospitalCost < highwayCost){
+            return (long) n * hospitalCost;
+        }
         int[] roots = new int[n];
-        for(int i =0; i < n; i++){
+        for(int i = 0; i < n; i++){
             roots[i] = i;
         }
-
-        for (int[] city : cities){
+        for (int[] city : cities) {
             int a = city[0] - 1;
             int b = city[1] - 1;
-            while(a != roots[a]){
+            while (a != roots[a]) {
                 a = roots[a];
             }
-            while(a != roots[b]){
+            while (b != roots[b]) {
                 b = roots[b];
             }
-            if(a != b)
+            if (a != b)
                 roots[b] = a;
         }
-        int total = 0;
+        long total = 0;
         int v = 0;
+        int unique = 0;
         for(int i =0; i < n; i++){
             if(roots[i] == i){
-                v++;
+                unique++;
             }
         }
-        System.out.println(v);
+        total += (long) (n - unique)* highwayCost;
+        System.out.println(highwayCost);
+        System.out.println(hospitalCost);
+        System.out.println(unique);
+        total += (long) unique * hospitalCost;
+        System.out.println(total);
         return total;
     }
 
