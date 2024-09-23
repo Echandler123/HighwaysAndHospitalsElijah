@@ -16,7 +16,9 @@ public class HighwaysAndHospitals {
         if(hospitalCost < highwayCost){
             return (long) n * hospitalCost;
         }
+        // Map for roots of nodes
         int[] roots = new int[n];
+        // Map for weight of trees
         int[] order = new int[n];
         // Setting every city to be the root of itself
         for(int i = 0; i < n; i++){
