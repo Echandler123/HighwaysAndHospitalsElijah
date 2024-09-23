@@ -37,7 +37,6 @@ public class HighwaysAndHospitals {
                 roots[b] = a;
         }
         long total = 0;
-        int v = 0;
         int unique = 0;
         for(int i =0; i < n; i++){
             if(roots[i] == i){
