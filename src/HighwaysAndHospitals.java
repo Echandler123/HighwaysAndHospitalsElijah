@@ -21,20 +21,40 @@ public class HighwaysAndHospitals {
             return (long) n * hospitalCost;
         }
         int[] roots = new int[n];
+        int[] order = new int[n];
         for(int i = 0; i < n; i++){
             roots[i] = i;
         }
         for (int[] city : cities) {
             int a = city[0] - 1;
             int b = city[1] - 1;
+            int x = a;
+            while (x != roots[x]) {
+                x = roots[x];
+            }
             while (a != roots[a]) {
-                a = roots[a];
+                int temp = roots[a];
+                roots[a] = x;
+                a = temp;
+            }
+            x = b;
+            while (x != roots[x]) {
+                x = roots[x];
             }
             while (b != roots[b]) {
-                b = roots[b];
+                int temp = roots[b];
+                roots[b] = x;
+                b = temp;
             }
             if (a != b)
-                roots[b] = a;
+                if (order[a] > order[b]){
+                    roots[b] = a;
+                    order[a] --;
+                }
+                else{
+                    roots[b] = a;
+                    order[b] --;
+                }
         }
         long total = 0;
         int unique = 0;
@@ -44,11 +64,7 @@ public class HighwaysAndHospitals {
             }
         }
         total += (long) (n - unique)* highwayCost;
-        System.out.println(highwayCost);
-        System.out.println(hospitalCost);
-        System.out.println(unique);
         total += (long) unique * hospitalCost;
-        System.out.println(total);
         return total;
     }
 
